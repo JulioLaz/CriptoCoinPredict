@@ -1,0 +1,128 @@
+:root {
+    --color_primario: rgba(218, 217, 216, 0.661);
+    --aler: red;
+    --button: blue;
+}
+
+
+.coin {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 30px;
+
+    a {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+        cursor: pointer;
+        gap: 10px;
+        border: none;
+        background: transparent;
+
+        img {
+            width: 2em;
+            border-radius: 8px;
+        }
+
+        img:hover {
+            filter: drop-shadow(8px 6px 4px #000000);
+        }
+
+        p {
+            text-decoration: none;
+            font-size: 10px;
+        }
+    }
+}
+
+.formulario {
+    display: flex;
+    justify-content: center;
+
+    form {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        background-color: var(--color_primario);
+        border-width: thick;
+        border-style: solid;
+        border-color: #000;
+        padding: 50px;
+
+
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 200px;
+            gap: 30px;
+
+            h1 {
+                font-size: 25px;
+                font-weight: bolder;
+                color: var(--button);
+            }
+
+            input {
+                width: 250px;
+            }
+
+            .alert {
+                font-size: 10px;
+                color: var(--aler);
+            }
+
+            button {
+                width: 120px;
+                background-color: var(--button);
+                border-radius: 3px;
+                font-size: 15px;
+                font-weight: bolder;
+                color: white;
+                padding: 5px 0 5px 0;
+                border-width: thin;
+                border-style: solid;
+                border-color: white;
+            }
+        }
+    }
+}
+
+.graficos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    gap: 10px;
+
+    h2 {
+        font-size: 20px;
+        font-weight: bolder;
+        text-align: center;
+        margin: 20px;
+    }
+
+    textarea {
+        resize: none;
+        background-color: lightgray;
+        color: black;
+        border: none;
+        padding: 20px;
+        width: 95%;
+    }
+
+    .canva {
+        margin-left: 20px;
+
+        p {
+            color: var(--aler);
+            font-size: 20px;
+        }
+    }
+}

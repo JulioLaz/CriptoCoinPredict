@@ -1,0 +1,10 @@
+matplotlib>=3.5,<3.6
+pandas
+pytz==2023.3.post1
+requests==2.31.0
+ta==0.10.2
+beautifulsoup4==4.11.2
+Flask
+load_dotenv
+statsmodels>=0.13,<0.14
+gunicorn
