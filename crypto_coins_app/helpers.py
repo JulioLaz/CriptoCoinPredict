@@ -58,8 +58,31 @@ def extraer():
         "imagen": [imagen["src"] for imagen in imagenes],
         "web_completa": [f'{web}{enlace.find("a")["href"]}' for enlace in enlaces],
         "moneda_nombre": [
-            moneda.text + " - " + nombre.text
+            f'{moneda.text}\n{nombre.text}'
             for moneda, nombre in zip(monedas, nombres)
+        ],
+    }
+
+    return datos
+
+
+def extraer_icon_name():
+    page = requests.get(web_coin)
+
+    soup = BeautifulSoup(page.content, "html.parser")
+
+    # Extraer los datos de los elementos HTML
+    imagenes = soup.find_all("img", class_="coin-logo")
+    # enlaces = soup.find_all("div", class_="sc-aef7b723-0 LCOyB")
+    # nombres = soup.find_all("p", class_="sc-4984dd93-0 kKpPOn")
+    monedas = soup.find_all("p", class_="sc-4984dd93-0 iqdbQL coin-item-symbol")
+
+    # Extraer los datos del dataframe de Python en un diccionario
+    datos = {
+        "imagen": [imagen["src"] for imagen in imagenes],
+        # "web_completa": [f'{web}{enlace.find("a")["href"]}' for enlace in enlaces],
+        "moneda_nombre": [
+            f'{moneda.text}' for moneda in monedas
         ],
     }
 
@@ -68,7 +91,6 @@ def extraer():
 
 def generar_html(datos):
     html = ""
-
     for i in range(len(datos["imagen"])):
         html += f"""
         <a href="{datos['web_completa'][i]}">
@@ -76,8 +98,37 @@ def generar_html(datos):
           <p>{datos['moneda_nombre'][i]}</p>
         </a>
     """
-
     return html
+
+# def generar_coin_icons_siglas(datos):
+#     icons = ""
+
+#     for i in range(len(datos["imagen"])):
+#         icons += f"""
+#         <div class="coin-container">
+#           <img style='width: 5rem;' src="{datos['imagen'][i]}" />
+#           <p class="p_coin">{datos['moneda_nombre'][i]}</p>
+#         </div>
+#     """
+#     return icons
+
+def generar_coin_icons_siglas(datos):
+    global crypto_nombre
+    icons = ""
+
+    for i in range(len(datos["imagen"])):
+        crypto_nombre = datos['moneda_nombre'][i].split('\n')[0]  # Obtén el nombre de la criptomoneda
+        print('crypto_nombre:',crypto_nombre)
+        icons += f"""
+        <div class="julio" data-crypto-name="{crypto_nombre}">
+          <div class="coin-container julio">
+            <img style='width: 5rem;' src="{datos['imagen'][i]}" />
+            <p class="p_coin">{datos['moneda_nombre'][i]}</p>
+          </div>
+        </div>
+        """
+    return icons
+
 
 
 def get_crypto_data():

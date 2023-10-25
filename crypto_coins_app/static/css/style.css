@@ -4,6 +4,16 @@
     --button: blue;
 }
 
+html {
+    background-image: url('../static/img_btc.png') !important;
+    /* src="../static/img_btc.png" */
+    /* background-image: url('https://i.imgur.com/wp7Sen0.jpg') !important; */
+    /* background-size: cover !important; Ajusta el tamaño de la imagen para cubrir todo el fondo */
+    /* background-repeat: no-repeat !important; Evita la repetición de la imagen */
+    /* background-color: aquamarine; */
+    /* Otros estilos que desees aplicar al fondo */
+}
+
 
 .coin {
     justify-content: center;
@@ -43,9 +53,9 @@
 .formulario {
     display: flex;
     justify-content: center;
+    margin-top: 0 !important;
 
     form {
-        padding: 20px;
         display: flex;
         justify-content: center;
         background-color: var(--color_primario);
@@ -93,30 +103,60 @@
     }
 }
 
+.textArea{
+    resize: none;
+    background-color: rgba(242, 238, 238,.8);
+    color: black;
+    padding: 1rem;
+    width: 80vw;
+    border-radius:0 0 8px 8px;
+    border: 1px solid grey;
+    font-size: 1.4rem !important;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+}
+
+.textArea_input{
+    resize: none;
+    background-color:rgb(224, 195, 11);
+    color: black;
+    padding: 1rem;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 5px solid black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    text-align: center !important;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h2{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 1rem 0;
+    font-size: 1.6rem;
+    text-align: center;
+    font-weight: 600;
+    padding: .3rem;
+    background-color: rgba(214, 210, 208, 0.661);
+}
+
 .graficos {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
     justify-content: center;
     align-items: center;
     margin: 20px;
     gap: 10px;
 
-    h2 {
-        font-size: 20px;
-        font-weight: bolder;
-        text-align: center;
-        margin: 20px;
-    }
-
     textarea {
         resize: none;
-        background-color: lightgray;
-        color: black;
-        border: none;
         padding: 20px;
         width: 95%;
     }
-
+    
     .canva {
         margin-left: 20px;
 
@@ -125,4 +165,50 @@
             font-size: 20px;
         }
     }
+}
+
+.icons_box{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+.coin-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    background-color: rgba(200, 194, 194, 0.5);
+    padding: .5rem;
+    border-radius: 8px;
+}
+
+.coin-container:hover {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    background-color: rgba(151, 145, 145, 0.5);
+    /* padding: .6rem; */
+    border-radius: 8px;
+}
+
+.p_coin{
+    margin: .5rem;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+.box_shadow{
+    /* background-image: url('../static/img_btc.png') !important; */
+
+    background: rgba(243, 230, 223, 0.661);
+    
+}
+.img_icons{
+    width: 5rem;
+}
+.titles{
+    padding: 1rem 0;
+    margin:1rem 0 0 0;
+    border-radius: 8px 8px 0 0;
+    border: 1px solid grey;
+
 }

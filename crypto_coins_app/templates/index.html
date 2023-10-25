@@ -1,124 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CryptoCoinPredic</title>
-    <link rel="stylesheet" href="../static/css/reset.css" />
-    <link rel="stylesheet" href="../static/css/style.css" />
-  </head>
-  <body>
-    <main>
-      <section>
-        <div class="coin">{{ html | safe }}</div>
-        <div class="formulario">
-          <form action="/respond" method="post">
-            <div>
-              <h1>Coloca tu Crypto</h1>
-              <input
-                type="text"
-                name="coin"
-                placeholder="Ingresa las iniciales de tu crypto ej:'BTC' "
-                required="required"
-              />
-              {% for message in get_flashed_messages() %}
-              <div class="alert">{{ message }}</div>
-              {% endfor %}
-              <button type="submit" class="button">Preguntame</button>
-            </div>
-          </form>
-        </div>
-      </section>
-      <section class="graficos">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CryptoCoinPredic</title>
+  <link rel="stylesheet" href="../static/css/reset.css" />
+  <link rel="stylesheet" href="../static/css/style.css" />
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}"> -->
+
+</head>
+
+<body>
+  <main>
+    <div style="width: 5rem;height: 1rem">
+      <img src="../static/img_btc.png" alt="" style="width: 100vw;height: 100vh;" >
+    </div>
+    <section>
+      <!-- <div class="julio"> -->
+      <div>
+        <div class="coin icons_box">{{ icons | safe }}</div>
+      </div>
+      <hr>
+
+      <div class="formulario">
+        <form action="/respond" method="post">
+          <div>
+            <input class="textArea_input" type="text" name="coin" placeholder="Coin" readonly/>
+            {% for message in get_flashed_messages() %}
+            <div class="alert">{{ message }}</div>
+            {% endfor %}
+            <!-- <button type="submit" class="button">Preguntame</button> -->
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="graficos">
+
+      <div class="centrado">
         <div>
-          <div>
-            <h2>Sugerencias del analisis de los datos</h2>
-            <textarea name="" id="" cols="120" rows="5">{{Desicion}}</textarea>
-          </div>
-          <div>
-            <h2>Predicciones en base a los datos</h2>
-            <textarea name="" id="" cols="60" rows="15">
-{{Predipcion}}</textarea
-            >
-          </div>
+          <h2 class="titles">Sugerencias del analisis de los datos</h2>
+          <textarea name="" id="" cols="120" rows="5" class="textArea " readonly>{{Desicion}}</textarea>
         </div>
-        <div class="canva">
-          <div class="grafico4">
-            <canvas
-              class="grafico"
-              id="grafico4"
-              width="1000"
-              height="400"
-            ></canvas>
-          </div>
-          <div class="grafico1">
-            <canvas
-              class="grafico"
-              id="grafico1"
-              width="1000"
-              height="400"
-            ></canvas>
-            {% if flash %}
-            <p class="alert">{{ flash }}</p>
-            {% endif %}
-          </div>
-          <div class="grafico2">
-            <canvas
-              class="grafico"
-              id="grafico2"
-              width="1000"
-              height="400"
-            ></canvas>
-          </div>
-          <div class="grafico3">
-            <canvas
-              class="grafico"
-              id="grafico3"
-              width="1000"
-              height="400"
-            ></canvas>
-          </div>
+        <div>
+          <h2 class="titles">Predicciones en base a los datos</h2>
+          <textarea name="" id="" cols="60" rows="15" class="textArea" readonly>
+            {{Predipcion}}
+          </textarea>
         </div>
-      </section>
-    </main>
-    <script>
-      const canvas1 = document.getElementById("grafico1");
-      const canvas2 = document.getElementById("grafico2");
-      const canvas3 = document.getElementById("grafico3");
-      const canvas4 = document.getElementById("grafico4");
+      </div>
 
-      const ctx1 = canvas1.getContext("2d");
-      const ctx2 = canvas2.getContext("2d");
-      const ctx3 = canvas3.getContext("2d");
-      const ctx4 = canvas4.getContext("2d");
+      <div class="canva">
+        <div class="grafico4">
+          <canvas class="grafico" id="grafico4" width="1000" height="400"></canvas>
+        </div>
+        <div class="grafico1">
+          <canvas class="grafico" id="grafico1" width="1000" height="400"></canvas>
+          {% if flash %}
+          <p class="alert">{{ flash }}</p>
+          {% endif %}
+        </div>
+        <div class="grafico2">
+          <canvas class="grafico" id="grafico2" width="1000" height="400"></canvas>
+        </div>
+        <div class="grafico3">
+          <canvas class="grafico" id="grafico3" width="1000" height="400"></canvas>
+        </div>
+      </div>
+    </section>
 
-      let grafico1 = new Image();
-      grafico1.src = "data:image/png;base64, {{Grafico1}}";
+  </main>
 
-      let grafico2 = new Image();
-      grafico2.src = "data:image/png;base64, {{Grafico2}}";
+  <script>
+    const canvas1 = document.getElementById("grafico1");
+    const canvas2 = document.getElementById("grafico2");
+    const canvas3 = document.getElementById("grafico3");
+    const canvas4 = document.getElementById("grafico4");
 
-      let grafico3 = new Image();
-      grafico3.src = "data:image/png;base64, {{Grafico3}}";
+    const ctx1 = canvas1.getContext("2d");
+    const ctx2 = canvas2.getContext("2d");
+    const ctx3 = canvas3.getContext("2d");
+    const ctx4 = canvas4.getContext("2d");
 
-      let grafico4 = new Image();
-      grafico4.src = "data:image/png;base64, {{Grafico4}}";
+    let grafico1 = new Image();
+    grafico1.src = "data:image/png;base64, {{Grafico1}}";
 
-      grafico1.onload = function () {
-        ctx1.drawImage(grafico1, 0, 0);
-      };
+    let grafico2 = new Image();
+    grafico2.src = "data:image/png;base64, {{Grafico2}}";
 
-      grafico2.onload = function () {
-        ctx2.drawImage(grafico2, 0, 0);
-      };
+    let grafico3 = new Image();
+    grafico3.src = "data:image/png;base64, {{Grafico3}}";
 
-      grafico3.onload = function () {
-        ctx3.drawImage(grafico3, 0, 0);
-      };
+    let grafico4 = new Image();
+    grafico4.src = "data:image/png;base64, {{Grafico4}}";
 
-      grafico4.onload = function () {
-        ctx4.drawImage(grafico4, 0, 0);
-      };
-    </script>
-  </body>
+    grafico1.onload = function () {
+      ctx1.drawImage(grafico1, 0, 0);
+    };
+
+    grafico2.onload = function () {
+      ctx2.drawImage(grafico2, 0, 0);
+    };
+
+    grafico3.onload = function () {
+      ctx3.drawImage(grafico3, 0, 0);
+    };
+
+    grafico4.onload = function () {
+      ctx4.drawImage(grafico4, 0, 0);
+    };
+  </script>
+
+<script>
+  const boxes = document.querySelectorAll('.julio');
+
+  boxes.forEach(box => {
+    box.addEventListener('click', () => {
+      const cryptoName = box.getAttribute('data-crypto-name'); // Obtén el nombre de la criptomoneda
+      const coinInput = document.querySelector('input[name="coin"]');
+      coinInput.value = cryptoName; // Establece el valor del campo de entrada
+      // console.log('cryptoName ',cryptoName);
+      const form = document.querySelector('form');
+      form.submit();
+    });
+  });
+</script>
+
+</body>
+
 </html>
