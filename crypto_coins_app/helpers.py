@@ -1,4 +1,5 @@
 import base64
+import pandas as pd
 import csv
 from io import BytesIO
 import os
@@ -43,6 +44,7 @@ def mayus(coin):
 
 
 def extraer():
+    global datos
     page = requests.get(web_coin)
 
     soup = BeautifulSoup(page.content, "html.parser")
@@ -62,19 +64,17 @@ def extraer():
             for moneda, nombre in zip(monedas, nombres)
         ],
     }
-
     return datos
 
 
 def extraer_icon_name():
-    page = requests.get(web_coin)
+    global datos
 
+    page = requests.get(web_coin)
     soup = BeautifulSoup(page.content, "html.parser")
 
     # Extraer los datos de los elementos HTML
     imagenes = soup.find_all("img", class_="coin-logo")
-    # enlaces = soup.find_all("div", class_="sc-aef7b723-0 LCOyB")
-    # nombres = soup.find_all("p", class_="sc-4984dd93-0 kKpPOn")
     monedas = soup.find_all("p", class_="sc-4984dd93-0 iqdbQL coin-item-symbol")
 
     # Extraer los datos del dataframe de Python en un diccionario
@@ -85,8 +85,28 @@ def extraer_icon_name():
             f'{moneda.text}' for moneda in monedas
         ],
     }
-
     return datos
+
+def extraer_img_coin(coin):
+    global data_target
+    data=extraer_icon_name()
+    data=pd.DataFrame(data)
+
+    nombre_moneda = coin  # Reemplaza con el nombre de la moneda que buscas
+
+    # Utiliza .loc para buscar la imagen por el nombre de la moneda
+    fila = data.loc[data['moneda_nombre'] == nombre_moneda]
+
+    # Comprueba si se encontró la moneda
+    if not fila.empty:
+        # Accede a la URL de la imagen
+        url_imagen = fila['imagen'].values[0]
+        print(f"URL de la imagen de {nombre_moneda}: {url_imagen}")
+    else:
+        print(f"No se encontró información para {nombre_moneda}")
+    data_target= [url_imagen,nombre_moneda]
+
+    return data_target
 
 
 def generar_html(datos):
@@ -99,18 +119,6 @@ def generar_html(datos):
         </a>
     """
     return html
-
-# def generar_coin_icons_siglas(datos):
-#     icons = ""
-
-#     for i in range(len(datos["imagen"])):
-#         icons += f"""
-#         <div class="coin-container">
-#           <img style='width: 5rem;' src="{datos['imagen'][i]}" />
-#           <p class="p_coin">{datos['moneda_nombre'][i]}</p>
-#         </div>
-#     """
-#     return icons
 
 def generar_coin_icons_siglas(datos):
     global crypto_nombre
@@ -128,6 +136,24 @@ def generar_coin_icons_siglas(datos):
         </div>
         """
     return icons
+
+def generar_coin_icons_target(coin):
+    datos = extraer_img_coin(coin)
+
+    global crypto_nombre
+    target = ""
+
+    crypto_nombre = datos[1]  # Obtén el nombre de la criptomoneda
+    url_img_coin = datos[0]
+    target += f"""
+    <div class="julio" data-crypto-name="{crypto_nombre}">
+      <div class="coin-container_target julio">
+        <img style='width: 7rem;' src="{url_img_coin}" />
+        <p class="p_coin">{crypto_nombre}</p>
+      </div>
+    </div>
+    """
+    return target
 
 
 

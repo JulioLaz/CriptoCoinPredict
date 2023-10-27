@@ -13,59 +13,163 @@
 
 <body>
   <main>
-    <div style="width: 5rem;height: 1rem">
-      <img src="../static/img_btc.png" alt="" style="width: 100vw;height: 100vh;" >
-    </div>
+    <!-- <div style="width: 5rem;height: 1rem">
+      <img src="../static/img_btc_00.png" alt="" style="width: 100vw;height: 100vh;" >
+    </div> -->
     <section>
-      <!-- <div class="julio"> -->
+
+      <div class="">
+        <h1>CRYPTO ANALISIS Y PREDICCIONES</h1>
+        <h2 class="h2_title">Elije tu crypto para ver el análisis y predicción</h2>
+      </div>
       <div>
         <div class="coin icons_box">{{ icons | safe }}</div>
       </div>
-      <hr>
+
+      <!-- <div class="coin icons_box">{{ Target | safe }}</div> -->
 
       <div class="formulario">
-        <form action="/respond" method="post">
-          <div>
-            <input class="textArea_input" type="text" name="coin" placeholder="Coin" readonly/>
-            {% for message in get_flashed_messages() %}
-            <div class="alert">{{ message }}</div>
-            {% endfor %}
-            <!-- <button type="submit" class="button">Preguntame</button> -->
+
+        <div class="">
+          <form action="/respond" method="post">
+            <div class="" style="display: flex;flex-direction: column; align-items: center;margin: 1rem;">
+              <!-- <div class="textArea_input"> -->
+              <div class="coin icons_box">{{ Target | safe }}</div>
+
+              <input class="textArea_input" type="text" name="coin" placeholder="Coin" readonly />
+              {% for message in get_flashed_messages() %}
+              <div class="alert">{{ message }}</div>
+              {% endfor %}
+              <!-- <button type="submit" class="button">Preguntame</button> -->
+            </div>
+          </form>
+        </div>
+
+        <div class="data sugerencias">
+          <h2 class="titles" style="border-bottom: none;">Sugerencia: análisis de datos</h2>
+          <textarea name="" id="" cols="" rows="16" class="textArea_analisis" readonly>{{Desicion}}</textarea>
+        </div>
+
+        <div class="data sugerencias">
+          <h2 class="titles" style="border-bottom: none;">Gráfica: Decisión</h2>
+          <textarea name="" id="" cols="" rows="16" class="textArea_graf" readonly>{{AboutClose}}</textarea>
+        </div>
+
+        <!-- <div class="aboutClose">
+          {{AboutClose}}
+        </div> -->
+
+        <div class="grafico1">
+          <div class="bg_graf">
+            <canvas style="margin-top: 1rem;" class="grafico" id="grafico1" width="800" height="420"></canvas>
           </div>
-        </form>
+        </div>
+
       </div>
     </section>
 
-    <section class="graficos">
+    <section class="">
+      <!-- <section class="graficos"> -->
 
       <div class="centrado">
-        <div>
-          <h2 class="titles">Sugerencias del analisis de los datos</h2>
-          <textarea name="" id="" cols="120" rows="5" class="textArea " readonly>{{Desicion}}</textarea>
-        </div>
-        <div>
-          <h2 class="titles">Predicciones en base a los datos</h2>
-          <textarea name="" id="" cols="60" rows="15" class="textArea" readonly>
-            {{Predipcion}}
-          </textarea>
+
+        <div class=" tablas">
+
+          <div class="data">
+            <h2 class="titles">Últimos valores de cierre</h2>
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>Fecha/hora</th>
+                  <th>Valor Cierre</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for idx, close_value in LastClose %}
+                <tr>
+                  <td>{{ idx }}</td>
+                  <td>{{ close_value }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="data">
+            <h2 class="titles">Predicciones 5hs futuras</h2>
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>Fecha/hora</th>
+                  <th>Valor Predicho</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for idx, close_value in Prediccion %}
+                <tr>
+                  <td>{{ idx }}</td>
+                  <td>{{ close_value }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
         </div>
       </div>
 
       <div class="canva">
-        <div class="grafico4">
-          <canvas class="grafico" id="grafico4" width="1000" height="400"></canvas>
+        <div class="centrado">
+
+          <div class="data sugerencias">
+            <h2 class="titles" style="border-bottom: none;">Gráfica: Predict-ARIMA</h2>
+            <textarea name="" id="" cols="" rows="16" class="textArea_graf" readonly>{{AboutArima}}</textarea>
+          </div>
+
+          <div class="grafico4 ">
+            <canvas class="grafico" id="grafico4" width="800" height="420"></canvas>
+          </div>
+
         </div>
-        <div class="grafico1">
-          <canvas class="grafico" id="grafico1" width="1000" height="400"></canvas>
-          {% if flash %}
-          <p class="alert">{{ flash }}</p>
-          {% endif %}
+      </div>
+
+      <div class="canva">
+        <div class="centrado">
+
+          <div class="data sugerencias">
+            <h2 class="titles" style="border-bottom: none;">RandomForestRegressor</h2>
+            <textarea name="" id="" cols="" rows="16" class="textArea_graf" readonly>{{AboutRFR}}</textarea>
+          </div>
+
+          <div class="grafico5 ">
+            <canvas class="grafico" id="grafico5" width="800" height="420"></canvas>
+          </div>
+
         </div>
-        <div class="grafico2">
-          <canvas class="grafico" id="grafico2" width="1000" height="400"></canvas>
+      </div>
+
+      <div class="canva">
+        <div class="centrado">
+          <div class="data sugerencias">
+            <h2 class="titles" style="border-bottom: none;">Gráfica: RSI</h2>
+            <textarea name="" id="" cols="" rows="16" class="textArea_graf" readonly>{{AboutRsi}}</textarea>
+          </div>
+          <div class="grafico2 ">
+            <canvas class="grafico" id="grafico2" width="800" height="420"></canvas>
+          </div>
         </div>
-        <div class="grafico3">
-          <canvas class="grafico" id="grafico3" width="1000" height="400"></canvas>
+      </div>
+
+
+      <div class="canva">
+        <div class="centrado">
+          <div class="data sugerencias">
+            <h2 class="titles" style="border-bottom: none;">Gráfica: MACD & SIGNAL</h2>
+            <textarea name="" id="" cols="" rows="16" class="textArea_graf" readonly>{{AboutMacd}}</textarea>
+          </div>
+          <div class="grafico3 ">
+            <canvas class="grafico" id="grafico3" width="800" height="420"></canvas>
+          </div>
         </div>
       </div>
     </section>
@@ -77,11 +181,13 @@
     const canvas2 = document.getElementById("grafico2");
     const canvas3 = document.getElementById("grafico3");
     const canvas4 = document.getElementById("grafico4");
+    const canvas5 = document.getElementById("grafico5");
 
     const ctx1 = canvas1.getContext("2d");
     const ctx2 = canvas2.getContext("2d");
     const ctx3 = canvas3.getContext("2d");
     const ctx4 = canvas4.getContext("2d");
+    const ctx5 = canvas5.getContext("2d");
 
     let grafico1 = new Image();
     grafico1.src = "data:image/png;base64, {{Grafico1}}";
@@ -94,6 +200,9 @@
 
     let grafico4 = new Image();
     grafico4.src = "data:image/png;base64, {{Grafico4}}";
+
+    let grafico5 = new Image();
+    grafico5.src = "data:image/png;base64, {{Grafico5}}";
 
     grafico1.onload = function () {
       ctx1.drawImage(grafico1, 0, 0);
@@ -110,22 +219,25 @@
     grafico4.onload = function () {
       ctx4.drawImage(grafico4, 0, 0);
     };
+
+    grafico5.onload = function () {
+      ctx5.drawImage(grafico5, 0, 0);
+    };
   </script>
 
-<script>
-  const boxes = document.querySelectorAll('.julio');
+  <script>
+    const boxes = document.querySelectorAll('.julio');
 
-  boxes.forEach(box => {
-    box.addEventListener('click', () => {
-      const cryptoName = box.getAttribute('data-crypto-name'); // Obtén el nombre de la criptomoneda
-      const coinInput = document.querySelector('input[name="coin"]');
-      coinInput.value = cryptoName; // Establece el valor del campo de entrada
-      // console.log('cryptoName ',cryptoName);
-      const form = document.querySelector('form');
-      form.submit();
+    boxes.forEach(box => {
+      box.addEventListener('click', () => {
+        const cryptoName = box.getAttribute('data-crypto-name'); // Obtén el nombre de la criptomoneda
+        const coinInput = document.querySelector('input[name="coin"]');
+        coinInput.value = cryptoName; // Establece el valor del campo de entrada
+        const form = document.querySelector('form');
+        form.submit();
+      });
     });
-  });
-</script>
+  </script>
 
 </body>
 

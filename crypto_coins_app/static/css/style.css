@@ -4,14 +4,13 @@
     --button: blue;
 }
 
-html {
-    background-image: url('../static/img_btc.png') !important;
-    /* src="../static/img_btc.png" */
-    /* background-image: url('https://i.imgur.com/wp7Sen0.jpg') !important; */
-    /* background-size: cover !important; Ajusta el tamaño de la imagen para cubrir todo el fondo */
-    /* background-repeat: no-repeat !important; Evita la repetición de la imagen */
-    /* background-color: aquamarine; */
-    /* Otros estilos que desees aplicar al fondo */
+
+body {
+    background-image: linear-gradient(to bottom, rgb(32, 32, 33), rgb(30, 4, 91));
+    background-image: url(../img_btc_00.png);
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
 
@@ -65,81 +64,111 @@ html {
         padding: 50px;
 
 
-        div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 200px;
-            gap: 30px;
+        .alert {
+            font-size: 10px;
+            color: var(--aler);
+        }
 
-            h1 {
-                font-size: 25px;
-                font-weight: bolder;
-                color: var(--button);
-            }
-
-            input {
-                width: 250px;
-            }
-
-            .alert {
-                font-size: 10px;
-                color: var(--aler);
-            }
-
-            button {
-                width: 120px;
-                background-color: var(--button);
-                border-radius: 3px;
-                font-size: 15px;
-                font-weight: bolder;
-                color: white;
-                padding: 5px 0 5px 0;
-                border-width: thin;
-                border-style: solid;
-                border-color: white;
-            }
+        button {
+            width: 120px;
+            background-color: var(--button);
+            border-radius: 3px;
+            font-size: 15px;
+            font-weight: bolder;
+            color: white;
+            padding: 5px 0 5px 0;
+            border-width: thin;
+            border-style: solid;
+            border-color: white;
         }
     }
 }
 
-.textArea{
+
+.textArea {
     resize: none;
-    background-color: rgba(242, 238, 238,.8);
+    background: rgba(243, 230, 223, 0.85);
     color: black;
     padding: 1rem;
-    width: 80vw;
-    border-radius:0 0 8px 8px;
+    /* width: 42vw; */
+    border-radius: 0 0 8px 8px;
     border: 1px solid grey;
     font-size: 1.4rem !important;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: 500;
 }
 
-.textArea_input{
+.textArea_analisis {
     resize: none;
-    background-color:rgb(224, 195, 11);
+    background: rgba(231, 227, 224, 0.95);
+    color: black;
+    padding: 1rem;
+    width: 25vw;
+    border-radius: 0 0 8px 8px;
+    border: 1px solid grey;
+    font-size: 1rem !important;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    font-weight: 300;
+}
+
+.textArea_graf {
+    resize: none;
+    background: rgba(231, 227, 224, 0.95);
+    /* background: rgba(239, 230, 226, 0.9); */
+    color: black;
+    padding: 1rem;
+    width: 15vw;
+    border-radius: 0 0 8px 8px;
+    border: 1px solid grey;
+    font-size: 1rem !important;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    font-weight: 300;
+}
+
+.textArea_input {
+    resize: none;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    background-color: rgba(200, 194, 194, 1);
+    padding: .5rem;
     color: black;
     padding: 1rem;
     width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    border: 5px solid black;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 2rem;
+    border-radius: 8px;
     font-weight: 800;
     font-size: 1.3rem;
     text-align: center !important;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-h2{
+h1 {
+    background-image: linear-gradient(to left, rgba(197, 197, 8, .8), rgba(243, 246, 208, .5));
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin: 1rem 0;
-    font-size: 1.6rem;
+    margin-top: 1rem;
+    font-size: 1.7rem;
     text-align: center;
     font-weight: 600;
-    padding: .3rem;
+    padding-top: .3rem;
     background-color: rgba(214, 210, 208, 0.661);
+    padding: .8rem;
+    color: rgb(5, 5, 60);
+}
+
+h2 {
+    padding-bottom: .8rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    text-align: center;
+    font-weight: 400;
+    background-color: rgba(214, 210, 208, 0.661);
+}
+
+.h2_title {
+    background-image: linear-gradient(to left, rgba(197, 197, 8, .8), rgba(243, 246, 208, .5));
 }
 
 .graficos {
@@ -147,7 +176,7 @@ h2{
     flex-direction: column;
     /* flex-wrap: wrap; */
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     margin: 20px;
     gap: 10px;
 
@@ -156,7 +185,7 @@ h2{
         padding: 20px;
         width: 95%;
     }
-    
+
     .canva {
         margin-left: 20px;
 
@@ -167,17 +196,32 @@ h2{
     }
 }
 
-.icons_box{
+.canva {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.icons_box {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    
 }
+
 .coin-container {
     display: flex;
     flex-direction: column;
     border: 1px solid grey;
-    background-color: rgba(200, 194, 194, 0.5);
+    background-color: rgba(212, 207, 207, 0.8);
+    padding: .5rem;
+    border-radius: 8px;
+}
+
+.coin-container_target {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    background-color: rgba(212, 207, 207, 0.8);
     padding: .5rem;
     border-radius: 8px;
 }
@@ -191,24 +235,88 @@ h2{
     border-radius: 8px;
 }
 
-.p_coin{
+.p_coin {
     margin: .5rem;
     font-weight: 600;
     font-size: 1.2rem;
 }
-.box_shadow{
-    /* background-image: url('../static/img_btc.png') !important; */
 
+.box_shadow {
     background: rgba(243, 230, 223, 0.661);
-    
 }
-.img_icons{
+
+.img_icons {
     width: 5rem;
 }
-.titles{
+
+.titles {
     padding: 1rem 0;
-    margin:1rem 0 0 0;
+    margin: 1rem 0 0 0;
     border-radius: 8px 8px 0 0;
     border: 1px solid grey;
+}
 
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 1rem 1.2rem;
+    text-align: center;
+    border-bottom: 1px solid grey;
+    border-right: 1px solid grey;
+    border-left: 1px solid grey;
+    background: rgba(231, 227, 224, 0.95);
+    font-size: 1.3rem !important;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600 !important;
+
+}
+
+.styled-table th {
+    background: rgba(243, 230, 223, 0.85);
+}
+
+.graf {
+    background-color: rgba(151, 145, 145, 0.5);
+}
+
+.centrado {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.grafico {
+    margin-top: 1rem;
+    border-radius: 8px;
+}
+
+.tablas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.data {
+    margin: 0 1rem;
+}
+
+.aboutClose {
+    resize: none;
+    background: rgba(243, 230, 223, 0.85);
+    color: black;
+    padding: 1rem;
+    width: 10vw;
+    margin: 0 1rem;
+    border-radius: 8px;
+    border: 1px solid grey;
+    font-size: 1rem !important;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    font-weight: 200;
 }
