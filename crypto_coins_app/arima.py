@@ -84,8 +84,8 @@ def predecir(coin):
 # ---------------------------------------------
     df_btc_close = df["close"]
 
-    model_pkl = ARIMA(df_btc_close, order=(1, 1, 1))
-    # model_pkl = ARIMA(df_btc_close, order=(3, 3, 3))
+    # model_pkl = ARIMA(df_btc_close, order=(1, 1, 1))
+    model_pkl = ARIMA(df_btc_close, order=(3, 3, 3))
     results = model_pkl.fit()
 
 
@@ -144,7 +144,7 @@ def grafico_predecir(coin):
     start_time = time.time()
 
     symbol = coin
-    period = 500
+    period = 1000
     interval = 1
     exchange = "USD"
 
@@ -236,7 +236,7 @@ def get_df_bitcoin(coin):
     # df.index = df.index.strftime('%Y-%m-%d %H:%M')
     # df_btc_close = df["close"]
     # Formatee el valor de la columna `time` en el formato `"%Y-%m-%d %H:%M"`.
-    df["time"] = df["time"].dt.strftime('%Y-%m-%d')
+    df["time"] = df["time"].dt.strftime('%Y-%m-%d %H:%M')
     # df["time"] = df["time"].dt.strftime('%H:%M')
     df["close"] = df["close"].astype(int)
 

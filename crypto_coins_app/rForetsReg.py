@@ -11,9 +11,16 @@ from sklearn.linear_model import LinearRegression
 from helpers import fig_to_base64
 
 
-def rForestRegr():
+def rForestRegr(coin):
+
+   if coin=='BTC':
+      coin_search=f'{coin}-USD'
+   elif coin=='ETH':
+      coin_search=f'{coin}-USD'
+   else: f'{coin}-USD'
+
 # Función para calcular el RSI
-   bitcoin = yf.Ticker("BTC-USD")
+   bitcoin = yf.Ticker(coin_search)
    data = bitcoin.history(period="100d", interval='1h')
 
    def calculate_RSI(data, window=14):
@@ -102,7 +109,7 @@ def rForestRegr():
    future_data = data.iloc[-1:].copy()
 
    # Crea un rango de fechas futuras con intervalos de 1 hora
-   periods = 2 
+   periods = 5 
    hours_interval = 1 #intervalos de horas a predecir
    future_dates = pd.date_range(start=future_data.index[0], periods=periods, freq=f'{hours_interval}H')
 
@@ -150,25 +157,28 @@ def rForestRegr():
    plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=2))  # Intervalo de 2 horas
    plt.gca().xaxis.set_major_formatter(date_format)
    plt.axhline(y=mean_close, linewidth=0.7, color='purple', linestyle='--', label="Valor promedio")
-   plt.title('Predicciones del Precio de Bitcoin: próxima hora futura')
+   plt.title(f'Predicciones del Precio de {coin_search}: en {periods} horas futuras')
 
    pred = ultimos_n_valores[1]
    ultimo_valor = data['Close'][-1:].values[0]
    delta = abs(pred - ultimo_valor)
    # print('delta de predict/ultimoValor: ', delta)
 
-   plt.text(data.index[-2:-1].values[0], pred+50, f'${pred:.0f} predic', fontsize=10, ha='center', va='bottom', color='red')
-   plt.text(data.index[-2:-1].values[0], data['Close'][-1:]-500, f'${ultimo_valor:.0f} valor real', fontsize=10, ha='center', va='bottom', color='blue', label="Ultimo valor real")
+   # x__real=(data['Close'][-1:])
+   # x_posicion_real= x__real - (x__real*1.002)
+   # x_posicion_predic= x__real - (x__real*1.02)
+   plt.text(data.index[-2:-1].values[0], data['Close'][-1:], f'${ultimo_valor:.0f}', fontsize=10, ha='center', va='bottom', color='blue', label="Ultimo valor real")
+   plt.text(data.index[-1:].values[0], pred, f'${pred:.0f}', fontsize=10, ha='center', va='bottom', color='red')
 
    plt.text(data.index[-1:].values[0], mean_close, f'${mean_close:.0f} mean', fontsize=9, ha='center', va='bottom', color='purple')
 
-   plt.scatter(ultimos_n_fechas[-1], predictions[-1], s=20, c='red', marker='o', label='Último Valor Predicho')
-   plt.scatter(data.index[-1:].values[0], data['Close'][-1:], s=20, c='blue', marker='o', label='Último Valor Close')
+   plt.scatter(ultimos_n_fechas[-1], predictions[-1], s=20, c='red', marker='o', label=f'Valor Predicho: ${pred:.0f}')
+   plt.scatter(data.index[-1:].values[0], data['Close'][-1:], s=20, c='blue', marker='o', label=f'Close:${ultimo_valor:.0f}')
 
-   plt.xlabel('Fecha')
-   plt.xticks(rotation=45)
+   # plt.xlabel('Fecha')
+   plt.xticks(rotation=25)
    plt.gca().xaxis.set_tick_params(labelsize=7)
-   plt.ylabel('Precio de Bitcoin')
+   plt.ylabel(f'Precio de {coin_search}')
    plt.legend()
    plt.grid(axis='x', linestyle='--', alpha=0.7)
 

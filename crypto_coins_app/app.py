@@ -82,7 +82,7 @@ def respuesta_chatbot():
     grafico2 = rsi_tendencias(coin, crypto)
     grafico3 = macd_tendencias(coin, crypto)
     grafico4 = grafico_predecir(coin)
-    grafico5 = rForestRegr()
+    grafico5 = rForestRegr(coin)
 
     end_time = time.time()
     duration = (end_time - start_time) / 60
